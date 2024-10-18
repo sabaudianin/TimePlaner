@@ -1,0 +1,29 @@
+#root {
+	margin: 0 auto;
+	text-align: center;
+	background: #f2f2f2;
+	font-family: "Merriweather", serif;
+}
+
+/* HTML: <div class="loader"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+	width: fit-content;
+	/* font-weight: bold; */
+	/* font-family: "Sixtyfour Convergence", serif; */
+	color: #000;
+	text-shadow: 0 0 0 rgb(255 0 0), 0 0 0 rgb(0 255 0), 0 0 0 rgb(0 0 255);
+	font-size: 1.2rem;
+	animation: l32 1s infinite cubic-bezier(0.5, -2000, 0.5, 2000);
+}
+.loader:before {
+	content: "";
+}
+
+@keyframes l32 {
+	25%,
+	100% {
+		text-shadow: 0.03px -0.01px 0.01px rgb(255 0 0),
+			0.02px 0.02px 0 rgb(219, 202, 94), -0.02px 0.02px 0 rgb(0 0 255);
+	}
+}
