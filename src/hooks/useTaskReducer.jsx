@@ -8,11 +8,16 @@ import {
 
 const taskReducer = (state, action) => {
 	switch (action.type) {
+		case "SET_TASK":
+			return {
+				...state,
+				tasks: action.payload.tasks,
+			};
 		case "ADD_TASK":
 			return {
 				...state,
 				tasks: [
-					...state.task,
+					...state.tasks,
 					{ id: action.id, text: action.text, completed: false },
 				],
 			};
@@ -34,8 +39,12 @@ const taskReducer = (state, action) => {
 	}
 };
 
-export const useTaskReducer = (initialState) => {
-	const [state, dispatch] = useReducer(taskReducer, initialState);
+export const useTaskReducer = () => {
+	const [state, dispatch] = useReducer(taskReducer, { tasks: [], points: 0 });
+
+	const setTasks = useCallback((tasks) => {
+		dispatch({ type: "SET_TASK", payload: { tasks } });
+	}, []);
 
 	const addTask = useCallback((task) => {
 		dispatch({ type: "ADD_TASK", payload: { task } });
