@@ -3,10 +3,11 @@ import { Button } from "../elements/Button";
 import { Input } from "../elements/Input";
 import { useAuthDispatch } from "../context/authorization/Authorization";
 
-export const Form = ({ toggleVisible }) => {
+export const SignUpForm = () => {
 	const {
 		register,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm();
 
@@ -16,22 +17,35 @@ export const Form = ({ toggleVisible }) => {
 		const { email, password } = data;
 
 		const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-		const findThisUser = existingUsers.find(
-			(user) => user.email === email && user.password === password
-		);
+		const isUsersExist = existingUsers.some((user) => {
+			user.email === email;
+		});
 
-		if (findThisUser) {
-			const token = "fakeToken";
-			login(findThisUser, token);
-			alert("Login Succesed");
+		if (isUsersExist) {
+			alert("user already Exist , please log in");
 		} else {
-			alert("Invalid email or password");
+			const newUser = {
+				email,
+				password,
+				points: 0,
+				weekPoints: 0,
+				tasks: [],
+			};
+			localStorage.setItem(
+				"users",
+				JSON.stringify([...existingUsers, newUser])
+			);
+
+			const token = "fakeToken";
+
+			login(data, token);
+			alert("account Createed! Logged iN");
 		}
 	};
 
 	return (
 		<div>
-			<h2 className="font-bold p-4 font-secondary">Log in</h2>
+			<h2 className="font-bold p-4 font-secondary">Create Account</h2>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
 				className="flex flex-col justify-center items-center gap-4 shadow-md p-16"
@@ -58,21 +72,27 @@ export const Form = ({ toggleVisible }) => {
 							value: 8,
 							message: "Password must be at least 8 symbols",
 						},
+						maxLength: {
+							value: 24,
+							message: "Password too long, max 24 symbols",
+						},
 					}}
 					error={errors.password}
 				/>
+				<Input
+					register={register}
+					name="rePassword"
+					type="password"
+					placeholder="Repeat password *"
+					validation={{
+						required: "Please repeat your password",
+						validate: (value) =>
+							value === watch("password") || "Passwords do not match",
+					}}
+					error={errors.rePassword}
+				/>
 				<div className="w-full flex justify-between">
-					<Button type="submit">Sign In</Button>
-
-					<Button
-						type="button"
-						onClick={() => {
-							console.log("Sign Up button clicked");
-							toggleVisible();
-						}}
-					>
-						Sign Up
-					</Button>
+					<Button type="submit">Sign Up</Button>
 				</div>
 			</form>
 		</div>

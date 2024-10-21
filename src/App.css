@@ -5,16 +5,13 @@
 	font-family: "Merriweather", serif;
 }
 
-/* HTML: <div class="loader"></div> */
-/* HTML: <div class="loader"></div> */
 .loader {
 	width: fit-content;
-	/* font-weight: bold; */
-	/* font-family: "Sixtyfour Convergence", serif; */
+
 	color: #000;
 	text-shadow: 0 0 0 rgb(255 0 0), 0 0 0 rgb(0 255 0), 0 0 0 rgb(0 0 255);
 	font-size: 1.2rem;
-	animation: l32 1s infinite cubic-bezier(0.5, -2000, 0.5, 2000);
+	animation: l32 1.1s infinite cubic-bezier(0.5, -2000, 0.5, 2000);
 }
 .loader:before {
 	content: "";
