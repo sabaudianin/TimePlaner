@@ -26,6 +26,7 @@ export const Form = ({ toggleVisible }) => {
 			//Save user to local storage
 			localStorage.setItem("token", token);
 			localStorage.setItem("user", JSON.stringify(findThisUser));
+
 			//Logging in
 			login(findThisUser, token);
 			alert("Login Succesed");
