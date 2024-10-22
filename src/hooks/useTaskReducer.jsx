@@ -24,9 +24,11 @@ const taskReducer = (state, action) => {
 		case "TOGGLE_TASK":
 			return {
 				...state,
-				tasks: state.tasks.map((task) => {
-					task.id === action.payload.id ? { ...task, completed: true } : task;
-				}),
+				tasks: state.tasks.map((task) =>
+					task.id === action.payload.id
+						? { ...task, completed: !task.completed }
+						: task
+				),
 			};
 		case "ADD_POINTS":
 			return {
@@ -46,8 +48,8 @@ export const useTaskReducer = () => {
 		dispatch({ type: "SET_TASK", payload: { tasks } });
 	}, []);
 
-	const addTask = useCallback((task) => {
-		dispatch({ type: "ADD_TASK", payload: { task } });
+	const addTask = useCallback((text) => {
+		dispatch({ type: "ADD_TASK", id: Date.now(), text });
 	}, []);
 
 	const toggleTask = useCallback((id) => {

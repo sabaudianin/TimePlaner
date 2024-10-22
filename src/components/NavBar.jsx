@@ -45,7 +45,7 @@ export const NavBar = () => {
 			) : null}
 
 			<button onClick={isAuthenticated ? logout : login}>
-				{isAuthenticated ? "Wyloguj się" : "Zaloguj się"}
+				{user ? `Witaj ${user.email}` : "Witaj nieznajomy"}
 			</button>
 		</nav>
 	);

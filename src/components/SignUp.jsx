@@ -29,6 +29,7 @@ export const SignUpForm = () => {
 				password,
 				points: 0,
 				weekPoints: 0,
+				weekPointsCompleted: 0,
 				tasks: [],
 			};
 			localStorage.setItem(

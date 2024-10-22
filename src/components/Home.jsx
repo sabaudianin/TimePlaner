@@ -2,9 +2,14 @@ import { useState } from "react";
 import { getWeek } from "../hooks/getWeek";
 import { Button } from "../elements/Button";
 import { Link } from "react-router-dom";
+import {
+	useAuthState,
+	useAuthDispatch,
+} from "../context/authorization/Authorization";
 
 export const Home = () => {
 	const [week, setWeek] = useState(getWeek);
+	const { isAuthenticated, user } = useAuthState();
 
 	return (
 		<section className="h-[90vh] w-full bg-blue-100">
@@ -58,9 +63,9 @@ export const Home = () => {
 							<h2>Week: {week}</h2>
 						</div>
 						<div className="bg-yellow-400">
-							<h2>Points:</h2>
-							<h3>Points planned this week:</h3>
-							<h3>Points earned this week:</h3>
+							<h2>Points:{user.points}</h2>
+							<h3>Points planned this week:{user.weekPoints}</h3>
+							<h3>Points earned this week:{user.weekPointsCompleted}</h3>
 						</div>
 					</div>
 				</div>

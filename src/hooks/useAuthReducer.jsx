@@ -41,7 +41,19 @@ export const useAuthReducer = (initialState) => {
 
 	const logout = useCallback(() => {
 		dispatch({ type: "LOGOUT" });
+		localStorage.removItem("user");
+		localStorage.removeItem("token");
 	}, [dispatch]);
+
+	//Restore after refreshing the page
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		const user = localStorage.getItem("user");
+
+		if (token && user) {
+			login(JSON.parse(user), token);
+		}
+	}, [login]);
 
 	return { state, login, logout };
 };
