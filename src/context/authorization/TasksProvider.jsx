@@ -5,34 +5,14 @@ import {
 	useCallback,
 	useEffect,
 } from "react";
-import { useAuthState } from "./authorization/Authorization";
+import { useAuthState } from "./Authorization";
 import { useTaskReducer } from "../../hooks/useTaskReducer";
+import { useAuthDispatch } from "./Authorization";
 
 const TaskStateContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-	const { user } = useAuthState();
-
-	const initialState = {
-		tasks: user?.tasks || [],
-		points: user?.points || 0,
-	};
-
-	const { state, setTasks, addTask, toggleTask, addPoints } =
-		useTaskReducer(initialState);
-
-	useEffect(() => {
-		if (user) {
-			const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-			const updatedUsers = storedUsers.map((storedUser) =>
-				storedUser.email === user.email
-					? { ...storedUser, tasks: state.tasks, points: state.points }
-					: storedUser
-			);
-
-			localStorage.setItem("users", JSON.stringify(updatedUsers));
-		}
-	}, [user, state.tasks, state.points]);
+	const { state, setTasks, addTask, toggleTask, addPoints } = useTaskReducer();
 
 	return (
 		<TaskStateContext.Provider

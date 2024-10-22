@@ -1,4 +1,8 @@
+import { useTaskContext } from "../context/authorization/TasksProvider";
+
 export const Tasks = () => {
+	const { state, setTasks, addTask, toggleTask, addPoints } = useTaskContext();
+
 	const tasks = [
 		{ id: 1, text: "Room Cleaning", points: 3 },
 		{ id: 2, text: "Vaccum saloon", points: 10 },
@@ -13,17 +17,20 @@ export const Tasks = () => {
 	];
 	return (
 		<div className="w-full flex items-center justify-center mx-10 mt-20">
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 w-full">
+			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 ">
 				{tasks.map((task) => (
 					<li
 						key={task.id}
-						className="bg-rgba(0,255,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(0,0,255,0.5)]"
+						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(0,0,255,0.5)]"
 					>
 						<p className="font-bold text-gray-800">{task.text}</p>
 						<p className="bg-blue-400 mt-2 text-white rounded p-2 text-center">
 							<b>{task.points}</b> points
 						</p>
-						<button className="bg-yellow-500 rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4">
+						<button
+							onClick={() => addTask(task)}
+							className="bg-yellow-500 rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="none"

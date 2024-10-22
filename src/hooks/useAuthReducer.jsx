@@ -18,6 +18,15 @@ const authReducer = (state, action) => {
 				token: null,
 			};
 
+		case "UPDATE_USER":
+			return {
+				...state,
+				user: {
+					...state.user,
+					...action.payload.user,
+				},
+			};
+
 		default:
 			return state;
 	}
@@ -35,25 +44,42 @@ export const useAuthReducer = (initialState) => {
 					token,
 				},
 			});
+			localStorage.setItem("user", JSON.stringify(user));
+			localStorage.setItem("token", token);
 		},
 		[dispatch]
 	);
 
 	const logout = useCallback(() => {
 		dispatch({ type: "LOGOUT" });
-		localStorage.removItem("user");
+		localStorage.removeItem("user");
 		localStorage.removeItem("token");
 	}, [dispatch]);
 
+	const updateUser = useCallback((updatedUserData) => {
+		dispatch({
+			type: "UPDATE_USER",
+			payload: { user: updatedUserData },
+		});
+		localStorage.setItem("user", JSON.stringify(updatedUserData));
+	}, []);
+
 	//Restore after refreshing the page
 	useEffect(() => {
-		const token = localStorage.getItem("token");
-		const user = localStorage.getItem("user");
+		try {
+			const token = localStorage.getItem("token");
+			const user = localStorage.getItem("user");
 
-		if (token && user) {
-			login(JSON.parse(user), token);
+			if (token && user && !state.isAuthenticated) {
+				login(JSON.parse(user), token);
+			}
+		} catch (error) {
+			console.error("Error parsing user data from localStorage", error);
+			// Remove data when corupted
+			localStorage.removeItem("user");
+			localStorage.removeItem("token");
 		}
 	}, [login]);
 
-	return { state, login, logout };
+	return { state, login, logout, updateUser };
 };

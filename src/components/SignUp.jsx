@@ -15,7 +15,7 @@ export const SignUpForm = () => {
 
 	const onSubmit = (data) => {
 		const { email, password } = data;
-
+		//check users exist or not
 		const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
 		const isUsersExist = existingUsers.some((user) => {
 			user.email === email;
@@ -39,7 +39,7 @@ export const SignUpForm = () => {
 
 			const token = "fakeToken";
 
-			login(data, token);
+			login(newUser, token);
 			alert("account Createed! Logged iN");
 		}
 	};

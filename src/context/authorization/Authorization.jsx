@@ -19,10 +19,11 @@ export const AuthorizationProvider = ({ children }) => {
 		user: null,
 		token: null,
 	};
-	const { state, login, logout } = useAuthReducer(initialState);
+	const { state, login, logout, updateUser } = useAuthReducer(initialState);
+
 	return (
 		<AuthStateContext.Provider value={state}>
-			<AuthDispatchContext.Provider value={{ login, logout }}>
+			<AuthDispatchContext.Provider value={{ login, logout, updateUser }}>
 				{children}
 			</AuthDispatchContext.Provider>
 		</AuthStateContext.Provider>
@@ -47,43 +48,3 @@ export const useAuthDispatch = () => {
 	}
 	return context;
 };
-
-// const AuthorizationContext = createContext();
-
-// export const AuthorizationProvider = ({ children }) => {
-
-// 	const [auth, setAuth] = useState(false);
-// 	const login = useCallback(() => {
-// 		setAuth(true);
-// 	}, []);
-// 	const logout = useCallback(() => {
-// 		localStorage.removeItem("authToken");
-// 		setAuth(false);
-// 	}, []);
-
-// 	useEffect(() => {
-// 		const savedAuth = localStorage.getItem("authToken");
-// 		if (savedAuth) {
-// 			setAuth(true);
-// 		}
-// 	}, []);
-
-// 	const authValue = useMemo(
-// 		() => ({
-// 			auth,
-// 			login,
-// 			logout,
-// 		}),
-// 		[auth, login, logout]
-// 	);
-
-// 	return (
-// 		<AuthorizationContext.Provider value={authValue}>
-// 			{children}
-// 		</AuthorizationContext.Provider>
-// 	);
-// };
-
-// export const useAuthorization = () => {
-// 	return useContext(AuthorizationContext);
-// };

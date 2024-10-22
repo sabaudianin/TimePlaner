@@ -5,6 +5,8 @@ import {
 	useCallback,
 	useEffect,
 } from "react";
+import { useAuthState } from "../context/authorization/Authorization";
+import { useAuthDispatch } from "../context/authorization/Authorization";
 
 const taskReducer = (state, action) => {
 	switch (action.type) {
@@ -43,22 +45,53 @@ const taskReducer = (state, action) => {
 
 export const useTaskReducer = () => {
 	const [state, dispatch] = useReducer(taskReducer, { tasks: [], points: 0 });
+	const { user } = useAuthState();
+	const { updateUser } = useAuthDispatch();
 
 	const setTasks = useCallback((tasks) => {
 		dispatch({ type: "SET_TASK", payload: { tasks } });
 	}, []);
 
-	const addTask = useCallback((text) => {
-		dispatch({ type: "ADD_TASK", id: Date.now(), text });
-	}, []);
+	const addTask = useCallback(
+		(task) => {
+			dispatch({ type: "ADD_TASK", id: Date.now(), text: task });
+			console.log(task);
 
-	const toggleTask = useCallback((id) => {
-		dispatch({ type: "TOGGLE_TASK", payload: { id } });
-	}, []);
+			const updatedUser = {
+				...user,
+				tasks: [...user.tasks, task],
+			};
+			updateUser(updatedUser);
+		},
+		[user, dispatch, updateUser]
+	);
 
-	const addPoints = useCallback((points) => {
-		dispatch({ type: "ADD_POINTS", payload: { points } });
-	}, []);
+	const toggleTask = useCallback(
+		(id) => {
+			dispatch({ type: "TOGGLE_TASK", payload: { id } });
+			const updatedUser = {
+				...user,
+				tasks: user.tasks.map(
+					(task) =>
+						(task.id = id ? { ...task, completed: !task.completed } : task)
+				),
+			};
+			updateUser(updatedUser);
+		},
+		[user, updateUser]
+	);
+
+	const addPoints = useCallback(
+		(points) => {
+			dispatch({ type: "ADD_POINTS", payload: { points } });
+			const updatedUser = {
+				...user,
+				points: user.points + points,
+			};
+			updateUser(updatedUser);
+		},
+		[user, updateUser]
+	);
 
 	return { state, setTasks, addTask, toggleTask, addPoints };
 };

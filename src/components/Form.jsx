@@ -23,10 +23,6 @@ export const Form = ({ toggleVisible }) => {
 		if (findThisUser) {
 			const token = "fakeToken";
 
-			//Save user to local storage
-			localStorage.setItem("token", token);
-			localStorage.setItem("user", JSON.stringify(findThisUser));
-
 			//Logging in
 			login(findThisUser, token);
 			alert("Login Succesed");
