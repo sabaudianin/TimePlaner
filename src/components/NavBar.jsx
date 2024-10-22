@@ -3,6 +3,7 @@ import {
 	useAuthState,
 	useAuthDispatch,
 } from "../context/authorization/Authorization";
+
 export const NavBar = () => {
 	const { isAuthenticated, user } = useAuthState();
 	const { login, logout } = useAuthDispatch();
@@ -36,10 +37,10 @@ export const NavBar = () => {
 						<Link to="/">Home</Link>
 					</li>
 					<li>
-						<Link to="/about">About</Link>
+						<Link to="/tasks">Tasks</Link>
 					</li>
 					<li>
-						<Link to="/contact">Contact</Link>
+						<Link to="/plan">Plan</Link>
 					</li>
 				</ul>
 			) : null}

@@ -5,7 +5,7 @@ import { Statistics } from "./Statistics";
 
 export const Home = () => {
 	return (
-		<section className="h-[90vh] w-full bg-blue-200 flex flex-col lg:flex-row h-full items-center ">
+		<section className="h-[90vh] w-full bg-blue-200 flex flex-col lg:flex-row items-center ">
 			<WeekList />
 
 			<div className=" lg:w-[70%] h-[100%] lg:h-full flex bg-pink-200 flex-nowrap">
