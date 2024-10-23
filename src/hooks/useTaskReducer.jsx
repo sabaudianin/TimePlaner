@@ -5,6 +5,8 @@ import {
 	useCallback,
 	useEffect,
 } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { useAuthState } from "../context/authorization/Authorization";
 import { useAuthDispatch } from "../context/authorization/Authorization";
 
@@ -13,14 +15,28 @@ const taskReducer = (state, action) => {
 		case "SET_TASK":
 			return {
 				...state,
-				tasks: action.payload.tasks,
+				tasks: [
+					...state.tasks,
+
+					{
+						id: state.tasks.length + 1,
+						text: action.text,
+						points: action.points,
+						completed: false,
+					},
+				],
 			};
 		case "ADD_TASK":
 			return {
 				...state,
 				tasks: [
 					...state.tasks,
-					{ id: action.id, text: action.text, completed: false },
+					{
+						id: action.id,
+						text: action.text,
+						points: action.points,
+						completed: false,
+					},
 				],
 			};
 		case "TOGGLE_TASK":
@@ -54,12 +70,25 @@ export const useTaskReducer = () => {
 
 	const addTask = useCallback(
 		(task) => {
-			dispatch({ type: "ADD_TASK", id: Date.now(), text: task });
-			console.log(task);
+			const taskId = uuidv4();
+			dispatch({
+				type: "ADD_TASK",
+				id: taskId,
+				text: task.text,
+				points: task.points,
+			});
 
 			const updatedUser = {
 				...user,
-				tasks: [...user.tasks, task],
+				tasks: [
+					...user.tasks,
+					{
+						id: taskId,
+						text: task.text,
+						points: task.points,
+						completed: false,
+					},
+				],
 			};
 			updateUser(updatedUser);
 		},
@@ -71,13 +100,13 @@ export const useTaskReducer = () => {
 			dispatch({ type: "TOGGLE_TASK", payload: { id } });
 			const updatedUser = {
 				...user,
-				tasks: user.tasks.map(
-					(task) =>
-						(task.id = id ? { ...task, completed: !task.completed } : task)
+				tasks: user.tasks.map((task) =>
+					task.id === id ? { ...task, completed: !task.completed } : task
 				),
 			};
 			updateUser(updatedUser);
 		},
+
 		[user, updateUser]
 	);
 

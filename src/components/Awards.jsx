@@ -1,4 +1,4 @@
-export const Plan = () => {
+export const Awards = () => {
 	return (
 		<div>
 			<h3>Planer</h3>

@@ -7,7 +7,7 @@ import { useAuthState } from "../context/authorization/Authorization";
 export const Home = () => {
 	const { isAuthenticated, user } = useAuthState();
 	return (
-		<section className="h-[90vh] w-full bg-blue-100 flex flex-col lg:flex-row items-center ">
+		<section className="min-h-[90vh] w-full bg-blue-100 flex flex-col lg:flex-row items-center ">
 			<WeekList />
 			<div className=" lg:w-[70%] h-[100%] lg:h-full flex  flex-nowrap">
 				<Statistics />
