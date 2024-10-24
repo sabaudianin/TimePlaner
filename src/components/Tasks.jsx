@@ -26,8 +26,9 @@ export const Tasks = () => {
 	};
 
 	return (
-		<div className="w-full flex items-center justify-center mx-10 mt-20">
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 ">
+		<div className="w-full flex  justify-center mx-10 mt-20 flex-wrap">
+			<div className="w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat"></div>
+			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8">
 				{tasksList.map((task) => (
 					<li
 						key={task.id}

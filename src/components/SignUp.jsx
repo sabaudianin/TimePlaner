@@ -30,7 +30,15 @@ export const SignUpForm = () => {
 				points: 0,
 				weekPoints: 0,
 				weekPointsCompleted: 0,
-				tasks: [],
+				tasks: {
+					MON: [],
+					TUE: [],
+					WEN: [],
+					THR: [],
+					FRI: [],
+					SAT: [],
+					SUN: [],
+				},
 			};
 			localStorage.setItem(
 				"users",

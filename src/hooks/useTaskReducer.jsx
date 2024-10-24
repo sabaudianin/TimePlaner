@@ -15,38 +15,42 @@ const taskReducer = (state, action) => {
 		case "SET_TASK":
 			return {
 				...state,
-				tasks: [
+				tasks: {
 					...state.tasks,
-
-					{
-						id: state.tasks.length + 1,
-						text: action.text,
-						points: action.points,
-						completed: false,
-					},
-				],
+					[action.payload.day]: [
+						...(state.tasks[action.payload.day] || []),
+						action.payload.tasks,
+					],
+				},
 			};
+
 		case "ADD_TASK":
 			return {
 				...state,
-				tasks: [
+				tasks: {
 					...state.tasks,
-					{
-						id: action.id,
-						text: action.text,
-						points: action.points,
-						completed: false,
-					},
-				],
+					[action.payload.day]: [
+						...(state.tasks[action.payload.day] || []),
+						{
+							id: action.id,
+							text: action.text,
+							points: action.points,
+							completed: false,
+						},
+					],
+				},
 			};
 		case "TOGGLE_TASK":
 			return {
 				...state,
-				tasks: state.tasks.map((task) =>
-					task.id === action.payload.id
-						? { ...task, completed: !task.completed }
-						: task
-				),
+				tasks: {
+					...state.tasks,
+					[action.payload.day]: state.tasks[action.payload.day].map((task) =>
+						task.id === action.payload.id
+							? { ...task, completed: !task.completed }
+							: task
+					),
+				},
 			};
 		case "ADD_POINTS":
 			return {
@@ -69,26 +73,30 @@ export const useTaskReducer = () => {
 	}, []);
 
 	const addTask = useCallback(
-		(task) => {
+		(task, day) => {
 			const taskId = uuidv4();
 			dispatch({
 				type: "ADD_TASK",
 				id: taskId,
 				text: task.text,
 				points: task.points,
+				day: day,
 			});
 
 			const updatedUser = {
 				...user,
-				tasks: [
+				tasks: {
 					...user.tasks,
-					{
-						id: taskId,
-						text: task.text,
-						points: task.points,
-						completed: false,
-					},
-				],
+					[day]: [
+						...(user.tasks[day] || []),
+						{
+							id: taskId,
+							text: task.text,
+							points: task.points,
+							completed: false,
+						},
+					],
+				},
 			};
 			updateUser(updatedUser);
 		},
@@ -96,18 +104,21 @@ export const useTaskReducer = () => {
 	);
 
 	const toggleTask = useCallback(
-		(id) => {
-			dispatch({ type: "TOGGLE_TASK", payload: { id } });
+		(id, day) => {
+			dispatch({ type: "TOGGLE_TASK", payload: { id, day } });
 			const updatedUser = {
 				...user,
-				tasks: user.tasks.map((task) =>
-					task.id === id ? { ...task, completed: !task.completed } : task
-				),
+				tasks: {
+					...user.tasks,
+					[day]: user.tasks[day].map((task) =>
+						task.id === id ? { ...task, completed: !task.completed } : task
+					),
+				},
 			};
 			updateUser(updatedUser);
 		},
 
-		[user, updateUser]
+		[user, updateUser, dispatch]
 	);
 
 	const addPoints = useCallback(
