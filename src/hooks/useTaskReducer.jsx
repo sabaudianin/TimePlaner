@@ -19,12 +19,13 @@ const taskReducer = (state, action) => {
 					...state.tasks,
 					[action.payload.day]: [
 						...(state.tasks[action.payload.day] || []),
-						action.payload.tasks,
+						...action.payload.tasks,
 					],
 				},
 			};
 
 		case "ADD_TASK":
+			console.log("Reducer Day:", action.payload.day);
 			return {
 				...state,
 				tasks: {
@@ -64,23 +65,28 @@ const taskReducer = (state, action) => {
 };
 
 export const useTaskReducer = () => {
-	const [state, dispatch] = useReducer(taskReducer, { tasks: [], points: 0 });
+	const [state, dispatch] = useReducer(taskReducer, { tasks: {}, points: 0 });
 	const { user } = useAuthState();
 	const { updateUser } = useAuthDispatch();
 
-	const setTasks = useCallback((tasks) => {
-		dispatch({ type: "SET_TASK", payload: { tasks } });
+	const setTasks = useCallback((tasks, day) => {
+		dispatch({ type: "SET_TASK", payload: { tasks, day } });
 	}, []);
 
 	const addTask = useCallback(
 		(task, day) => {
+			if (!day) {
+				console.error("Day is undefined while adding task");
+				return;
+			}
+
 			const taskId = uuidv4();
 			dispatch({
 				type: "ADD_TASK",
 				id: taskId,
 				text: task.text,
 				points: task.points,
-				day: day,
+				payload: { day },
 			});
 
 			const updatedUser = {

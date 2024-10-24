@@ -1,8 +1,10 @@
+import { set } from "react-hook-form";
 import { useTaskContext } from "../context/authorization/TasksProvider";
 import { useState } from "react";
 
 export const Tasks = () => {
 	const { state, setTasks, addTask, toggleTask, addPoints } = useTaskContext();
+
 	const [tasksList, setTasksList] = useState([
 		{ id: 1, text: "Room Cleaning", points: 3 },
 		{ id: 2, text: "Vaccum saloon", points: 10 },
@@ -16,18 +18,36 @@ export const Tasks = () => {
 		{ id: 10, text: "Read a book", points: 6 },
 	]);
 
-	const addCustomTask = (data) => {
-		const newTask = {
-			id: tasksList.length + 1,
-			text: data.text,
-			points: data.points,
-		};
-		setTasksList[{ ...tasksList, newTask }];
+	const [selectedDay, setSelectedDay] = useState("MON");
+
+	const addCustomTask = (task) => {
+		console.log("Selected Day:", selectedDay);
+		console.log("Task:", task);
+		if (!selectedDay) {
+			console.error("Selected day is undefined");
+			return;
+		}
+		addTask(task, selectedDay);
 	};
 
 	return (
-		<div className="w-full flex  justify-center mx-10 mt-20 flex-wrap">
+		<section className="w-full flex  justify-center mx-10 mt-20 flex-wrap">
 			<div className="w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat"></div>
+			<div className="w-full flex justify-center mt-4">
+				<select
+					className="bg-gray-100 p-2 rounded border border-gray-400"
+					value={selectedDay}
+					onChange={(e) => setSelectedDay(e.target.value)}
+				>
+					<option value="MON">Monday</option>
+					<option value="TUE">Tuesday</option>
+					<option value="WEN">Wednesday</option>
+					<option value="THR">Thursday</option>
+					<option value="FRI">Friday</option>
+					<option value="SAT">Saturday</option>
+					<option value="SUN">Sunday</option>
+				</select>
+			</div>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8">
 				{tasksList.map((task) => (
 					<li
@@ -39,7 +59,7 @@ export const Tasks = () => {
 							<b>{task.points}</b> points
 						</p>
 						<button
-							onClick={() => addTask(task)}
+							onClick={() => addCustomTask(task)}
 							className="bg-yellow-500 rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4"
 						>
 							<svg
@@ -85,6 +105,6 @@ export const Tasks = () => {
 					</button>
 				</li>
 			</ul>
-		</div>
+		</section>
 	);
 };
