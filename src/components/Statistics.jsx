@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthState } from "../context/authorization/Authorization";
 import { useTaskContext } from "../context/authorization/TasksProvider";
 import { getWeek } from "../hooks/getWeek";
@@ -8,7 +8,11 @@ export const Statistics = ({ selectedDay }) => {
 	const [week, setWeek] = useState(getWeek);
 	const { isAuthenticated, user } = useAuthState();
 
-	const { state, setTasks, addTask, toggleTask, addPoints } = useTaskContext();
+	const { calculateWeekPoints } = useTaskContext();
+
+	useEffect(() => {
+		calculateWeekPoints();
+	}, []);
 
 	return (
 		<section className="w-full h-full flex flex-col">

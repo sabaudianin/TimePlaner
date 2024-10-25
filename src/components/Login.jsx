@@ -12,8 +12,8 @@ export const Login = () => {
 	};
 
 	return (
-		<section className="flex justify-around items-center min-h-[90vh] flex-col lg:flex-row">
-			<div className="w-full lg:w-1/2 h-full lg:h-full hidden lg:flex justify-center items-center ">
+		<section className="flex justify-around items-center min-h-[90vh] flex-col lg:flex-row  ">
+			<div className="w-full lg:w-1/2 h-full lg:h-full hidden lg:flex justify-center items-center  ">
 				<div className="relative w-[80%] h-[80%] bg-red-400 ">
 					<ImageBox src="/learn.jpg" top="top-10" left="left-0" />
 					<ImageBox src="/words.jpg" bottom="bottom-60" left="left-0" />
@@ -38,6 +38,7 @@ export const Login = () => {
 					/>
 				</div>
 			</div>
+			<div className="hidden lg:block absolute w-1/2 h-1/3 bg-[url('/bg.png')] bg-contain bg-bottom bg-no-repeat self-end"></div>
 
 			<div className="flex justify-center items-center w-full lg:w-1/2 h-full lg:h-full  ">
 				{isVisible ? <SignUpForm /> : <Form toggleVisible={toggleVisible} />}

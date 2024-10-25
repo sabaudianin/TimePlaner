@@ -41,24 +41,45 @@ const taskReducer = (state, action) => {
 					],
 				},
 			};
-		case "TOGGLE_TASK":
+		case "TOGGLE_TASK": {
+			const updatedTasks = { ...state.tasks };
+			for (const day in updatedTasks) {
+				updatedTasks[day] = updatedTasks[day].map((task) =>
+					task.id === action.payload.id
+						? { ...task, completed: !task.completed }
+						: task
+				);
+			}
+
+			// Recalculate completed points
+			const weekPointsCompleted = Object.values(updatedTasks)
+				.flat()
+				.reduce((sum, task) => (task.completed ? sum + task.points : sum), 0);
+
 			return {
 				...state,
-				tasks: {
-					...state.tasks,
-					[action.payload.day]: state.tasks[action.payload.day].map((task) =>
-						task.id === action.payload.id
-							? { ...task, completed: !task.completed }
-							: task
-					),
-				},
+				tasks: updatedTasks,
+				weekPointsCompleted,
 			};
+		}
+
 		case "ADD_POINTS":
 			return {
 				...state,
 				points: state.points + action.payload.points,
 			};
-
+		case "CALCULATE_WEEK_POINTS": {
+			let totalPoints = 0;
+			for (const day in state.tasks) {
+				state.tasks[day].forEach((task) => {
+					totalPoints += task.points;
+				});
+			}
+			return {
+				...state,
+				weekPoints: totalPoints,
+			};
+		}
 		default:
 			return state;
 	}
@@ -110,21 +131,28 @@ export const useTaskReducer = () => {
 	);
 
 	const toggleTask = useCallback(
-		(id, day) => {
-			dispatch({ type: "TOGGLE_TASK", payload: { id, day } });
-			const updatedUser = {
-				...user,
-				tasks: {
-					...user.tasks,
-					[day]: user.tasks[day].map((task) =>
-						task.id === id ? { ...task, completed: !task.completed } : task
-					),
-				},
-			};
-			updateUser(updatedUser);
-		},
+		(id) => {
+			dispatch({ type: "TOGGLE_TASK", payload: { id } });
 
-		[user, updateUser, dispatch]
+			const updatedUserTasks = { ...user.tasks };
+			for (const day in updatedUserTasks) {
+				updatedUserTasks[day] = updatedUserTasks[day].map((task) =>
+					task.id === id ? { ...task, completed: !task.completed } : task
+				);
+			}
+
+			// Calculate completed points for updated user tasks
+			const weekPointsCompleted = Object.values(updatedUserTasks)
+				.flat()
+				.reduce((sum, task) => (task.completed ? sum + task.points : sum), 0);
+
+			updateUser({
+				...user,
+				tasks: updatedUserTasks,
+				weekPointsCompleted,
+			});
+		},
+		[user, dispatch, updateUser]
 	);
 
 	const addPoints = useCallback(
@@ -139,5 +167,29 @@ export const useTaskReducer = () => {
 		[user, updateUser]
 	);
 
-	return { state, setTasks, addTask, toggleTask, addPoints };
+	const calculateWeekPoints = useCallback(() => {
+		dispatch({ type: "CALCULATE_WEEK_POINTS" });
+		const totalPoints = Object.values(user.tasks).reduce((acc, dayTasks) => {
+			return (
+				acc +
+				dayTasks.reduce((daySum, task) => {
+					return daySum + task.points;
+				}, 0)
+			);
+		}, 0);
+
+		updateUser({
+			...user,
+			weekPoints: totalPoints,
+		});
+	}, [user, updateUser, dispatch]);
+
+	return {
+		state,
+		setTasks,
+		addTask,
+		toggleTask,
+		addPoints,
+		calculateWeekPoints,
+	};
 };

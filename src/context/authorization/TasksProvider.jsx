@@ -12,11 +12,25 @@ import { useAuthDispatch } from "./Authorization";
 const TaskStateContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-	const { state, setTasks, addTask, toggleTask, addPoints } = useTaskReducer();
+	const {
+		state,
+		setTasks,
+		addTask,
+		toggleTask,
+		addPoints,
+		calculateWeekPoints,
+	} = useTaskReducer();
 
 	return (
 		<TaskStateContext.Provider
-			value={{ state, addTask, toggleTask, addPoints }}
+			value={{
+				state,
+				addTask,
+				toggleTask,
+				setTasks,
+				addPoints,
+				calculateWeekPoints,
+			}}
 		>
 			{children}
 		</TaskStateContext.Provider>
