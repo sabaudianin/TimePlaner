@@ -40,7 +40,7 @@ export const NavBar = () => {
 						<Link to="/tasks">Tasks</Link>
 					</li>
 					<li>
-						<Link to="/plan">Plan</Link>
+						<Link to="/awards">Awards</Link>
 					</li>
 				</ul>
 			) : null}
