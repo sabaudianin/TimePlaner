@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTaskContext } from "../context/authorization/TasksProvider";
 
 export const Awards = () => {
 	const [awardsList, setAwardsList] = useState([
@@ -50,7 +51,20 @@ export const Awards = () => {
 			points: 300,
 			icon: <i className="fa-solid fa-gift"></i>,
 		},
+		{
+			id: 8,
+			text: "Mystery Box",
+			points: 300,
+			icon: <i className="fa-solid fa-gift"></i>,
+		},
 	]);
+
+	const { state, deductPoints } = useTaskContext();
+
+	const handleAward = (award) => {
+		deductPoints(award.points);
+		console.log(`Picked award: ${award.text}`);
+	};
 	return (
 		<div>
 			<i className="fa-solid fa-award" />
@@ -68,7 +82,10 @@ export const Awards = () => {
 							<b>{award.points}</b> points
 						</p>
 						<button
-							onClick={() => console.log(award)}
+							onClick={() => {
+								console.log(award);
+								handleAward(award);
+							}}
 							className="mt-2 bg-green-400 hover:bg-green-500"
 						>
 							Pick this prize
