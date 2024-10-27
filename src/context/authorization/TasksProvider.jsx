@@ -17,7 +17,7 @@ export const TasksProvider = ({ children }) => {
 		setTasks,
 		addTask,
 		toggleTask,
-		addPoints,
+		deductPoints,
 		calculateWeekPoints,
 	} = useTaskReducer();
 
@@ -28,7 +28,7 @@ export const TasksProvider = ({ children }) => {
 				addTask,
 				toggleTask,
 				setTasks,
-				addPoints,
+				deductPoints,
 				calculateWeekPoints,
 			}}
 		>

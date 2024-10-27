@@ -27,7 +27,7 @@ export const SignUpForm = () => {
 			const newUser = {
 				email,
 				password,
-				points: 0,
+				points: 100,
 				weekPoints: 0,
 				weekPointsCompleted: 0,
 				tasks: {

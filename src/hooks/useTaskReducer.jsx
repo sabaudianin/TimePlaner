@@ -63,11 +63,18 @@ const taskReducer = (state, action) => {
 			};
 		}
 
-		case "ADD_POINTS":
+		case "DEDUCT_POINTS": {
+			const newPoints = state.points - action.payload.points;
+			if (newPoints < 0) {
+				console.warn("Not enough points to claim this award.");
+				return state;
+			}
 			return {
 				...state,
-				points: state.points + action.payload.points,
+				points: newPoints,
 			};
+		}
+
 		case "CALCULATE_WEEK_POINTS": {
 			let totalPoints = 0;
 			for (const day in state.tasks) {
@@ -155,16 +162,21 @@ export const useTaskReducer = () => {
 		[user, dispatch, updateUser]
 	);
 
-	const addPoints = useCallback(
+	const deductPoints = useCallback(
 		(points) => {
-			dispatch({ type: "ADD_POINTS", payload: { points } });
+			if (user.points < points) {
+				alert("Not enough points to claim this award.");
+				return;
+			}
+			dispatch({ type: "DEDUCT_POINTS", payload: { points } });
+
 			const updatedUser = {
 				...user,
-				points: user.points + points,
+				points: user.points - points,
 			};
 			updateUser(updatedUser);
 		},
-		[user, updateUser]
+		[user, dispatch, updateUser]
 	);
 
 	const calculateWeekPoints = useCallback(() => {
@@ -189,7 +201,7 @@ export const useTaskReducer = () => {
 		setTasks,
 		addTask,
 		toggleTask,
-		addPoints,
+		deductPoints,
 		calculateWeekPoints,
 	};
 };
