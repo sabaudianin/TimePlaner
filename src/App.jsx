@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Awards } from "./components/Awards";
@@ -17,6 +20,8 @@ function App() {
 						<Route path="tasks" element={<Tasks />} />
 					</Route>
 				</Routes>
+
+				<ToastContainer />
 			</BrowserRouter>
 		</>
 	);

@@ -1,4 +1,7 @@
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { Button } from "../elements/Button";
 import { Input } from "../elements/Input";
 import { useAuthDispatch } from "../context/authorization/Authorization";
@@ -25,9 +28,9 @@ export const Form = ({ toggleVisible }) => {
 
 			//Logging in
 			login(findThisUser, token);
-			alert("Login Succesed");
+			toast.success("Login Succesed");
 		} else {
-			alert("Invalid email or password");
+			toast.error("Invalid email or password");
 		}
 	};
 
