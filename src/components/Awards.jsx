@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTaskContext } from "../context/authorization/TasksProvider";
+import { useAuthState } from "../context/authorization/Authorization";
 
 export const Awards = () => {
 	const [awardsList, setAwardsList] = useState([
@@ -36,7 +37,7 @@ export const Awards = () => {
 		},
 		{
 			id: 6,
-			text: "Mystery Box",
+			text: "Mystery Gift",
 			points: 300,
 			icon: <i className="fa-solid fa-gift"></i>,
 		},
@@ -59,15 +60,18 @@ export const Awards = () => {
 			icon: <i className="fa-solid fa-award " />,
 		},
 	]);
-
-	const { state, deductPoints } = useTaskContext();
+	const { user } = useAuthState();
+	const { deductPoints } = useTaskContext();
 
 	const handleAward = (award) => {
 		deductPoints(award.points);
 		console.log(`Picked award: ${award.text}`);
 	};
 	return (
-		<div>
+		<section>
+			<h2 className="pt-8">
+				Available points: <b> {user.points}</b>
+			</h2>
 			<h3 className="font-bold my-8 text-3xl">Awards List:</h3>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8 mx-4">
 				{awardsList.map((award) => (
@@ -75,7 +79,7 @@ export const Awards = () => {
 						key={award.id}
 						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(255,0,55,0.5)]"
 					>
-						<p className="flex justify-center items-center text-center fa-2x text-orange-500 ">
+						<p className="flex justify-center items-center text-center fa-2x text-red-500 ">
 							{award.icon}
 						</p>
 						<p className="font-bold text-gray-800">{award.text}</p>
@@ -94,6 +98,6 @@ export const Awards = () => {
 					</li>
 				))}
 			</ul>
-		</div>
+		</section>
 	);
 };

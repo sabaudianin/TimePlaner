@@ -1,9 +1,9 @@
-import { set } from "react-hook-form";
-import { useTaskContext } from "../context/authorization/TasksProvider";
 import { useState } from "react";
+import { useTaskContext } from "../context/authorization/TasksProvider";
+import { CustomTask } from "./CustomTask";
 
 export const Tasks = () => {
-	const { state, setTasks, addTask, toggleTask, addPoints } = useTaskContext();
+	const { addTask } = useTaskContext();
 
 	const [tasksList, setTasksList] = useState([
 		{ id: 1, text: "Room Cleaning", points: 3 },
@@ -19,6 +19,7 @@ export const Tasks = () => {
 	]);
 
 	const [selectedDay, setSelectedDay] = useState("MON");
+	const [isOpen, setIsOpen] = useState(false);
 
 	const addCustomTask = (task) => {
 		console.log("Selected Day:", selectedDay);
@@ -30,12 +31,18 @@ export const Tasks = () => {
 		addTask(task, selectedDay);
 	};
 
+	const handleAddTask = (newTask) => {
+		const updatedTask = { ...newTask, id: tasksList.length + 1 };
+		setTasksList([...tasksList, updatedTask]);
+		addTask(updatedTask, selectedDay);
+	};
+
 	return (
-		<section className="w-full flex  justify-center mx-10 mt-20 flex-wrap">
+		<section className="w-full flex  justify-center  pt-20 flex-wrap">
 			<div className="w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat"></div>
-			<div className="w-full flex justify-center mt-4">
+			<div className="w-full flex justify-center pt-4">
 				<select
-					className="bg-gray-100 p-2 rounded border border-gray-400"
+					className=" p-2 rounded border-4 border-blue-400 focus:bg-blue-100 "
 					value={selectedDay}
 					onChange={(e) => setSelectedDay(e.target.value)}
 				>
@@ -48,7 +55,8 @@ export const Tasks = () => {
 					<option value="SUN">Sunday</option>
 				</select>
 			</div>
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8">
+
+			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 pt-8">
 				{tasksList.map((task) => (
 					<li
 						key={task.id}
@@ -85,7 +93,9 @@ export const Tasks = () => {
 						<b>?</b> points
 					</p>
 					<button
-						onClick={addCustomTask}
+						onClick={() => {
+							setIsOpen(true);
+						}}
 						className="bg-yellow-500 rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4 text-center"
 					>
 						<svg
@@ -105,6 +115,11 @@ export const Tasks = () => {
 					</button>
 				</li>
 			</ul>
+			<CustomTask
+				isOpen={isOpen}
+				onClose={() => setIsOpen(false)}
+				onAddTask={handleAddTask}
+			/>
 		</section>
 	);
 };

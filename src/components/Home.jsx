@@ -14,7 +14,7 @@ export const Home = () => {
 	};
 
 	return (
-		<section className="min-h-[90vh] w-full bg-blue-100 flex flex-col lg:flex-row ">
+		<section className="min-h-[90vh] w-full  flex flex-col lg:flex-row ">
 			<WeekList onSelectDay={handleDaySelect} />
 			<div className=" lg:w-[70%] h-[100%] lg:h-full flex  flex-nowrap">
 				<Statistics selectedDay={selectedDay} />

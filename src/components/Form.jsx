@@ -72,7 +72,7 @@ export const Form = ({ toggleVisible }) => {
 					<Button
 						type="button"
 						onClick={() => {
-							console.log("Sign Up button clicked");
+							console.log("Sign Up b");
 							toggleVisible();
 						}}
 					>

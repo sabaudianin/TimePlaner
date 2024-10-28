@@ -6,6 +6,7 @@ import {
 	useEffect,
 } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 import { useAuthState } from "../context/authorization/Authorization";
 import { useAuthDispatch } from "../context/authorization/Authorization";
@@ -66,7 +67,6 @@ const taskReducer = (state, action) => {
 		case "DEDUCT_POINTS": {
 			const newPoints = state.points - action.payload.points;
 			if (newPoints < 0) {
-				console.warn("Not enough points to claim this award.");
 				return state;
 			}
 			return {
@@ -104,7 +104,7 @@ export const useTaskReducer = () => {
 	const addTask = useCallback(
 		(task, day) => {
 			if (!day) {
-				console.error("Day is undefined while adding task");
+				toast.error("Day is undefined while adding task");
 				return;
 			}
 
@@ -165,7 +165,7 @@ export const useTaskReducer = () => {
 	const deductPoints = useCallback(
 		(points) => {
 			if (user.points < points) {
-				alert("Not enough points to claim this award.");
+				toast.error("Not enough points to claim this award.");
 				return;
 			}
 			dispatch({ type: "DEDUCT_POINTS", payload: { points } });

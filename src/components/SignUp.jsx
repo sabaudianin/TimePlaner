@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "../elements/Button";
 import { Input } from "../elements/Input";
 import { useAuthDispatch } from "../context/authorization/Authorization";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export const SignUpForm = () => {
