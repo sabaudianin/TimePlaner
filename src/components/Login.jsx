@@ -40,7 +40,7 @@ export const Login = () => {
 			</div>
 			<div className="hidden lg:block absolute w-1/2 h-1/3 bg-[url('/bg.png')] bg-contain bg-bottom bg-no-repeat self-end"></div>
 
-			<div className="flex justify-center items-center w-full lg:w-1/2 h-full lg:h-full  ">
+			<div className="flex justify-center items-center w-full lg:w-1/2 h-full lg:h-full">
 				{isVisible ? <SignUpForm /> : <Form toggleVisible={toggleVisible} />}
 			</div>
 		</section>

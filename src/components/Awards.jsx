@@ -7,55 +7,56 @@ export const Awards = () => {
 			id: 1,
 			text: "Movie evening ",
 			points: 50,
-			icon: <i className="fa-regular fa-video"></i>,
+			icon: <i className="fa-solid fa-tv"></i>,
 		},
+
 		{
 			id: 2,
-			text: "Going to the cinema ",
-			points: 100,
-			icon: <i className="fa-solid fa-film"></i>,
-		},
-		{
-			id: 3,
-			text: "Holidays in paradise",
-			points: 999,
-			icon: <i className="fa-solid fa-heart"></i>,
-		},
-		{
-			id: 4,
-			text: "Custom Wish",
-			points: 500,
-			icon: <i className="fa-solid fa-award " />,
-		},
-		{
-			id: 5,
 			text: "Pizza Time",
 			points: 200,
 			icon: <i className="fa-solid fa-pizza-slice"></i>,
 		},
 		{
-			id: 6,
+			id: 3,
 			text: "Trip to Shopping mall",
 			points: 200,
 			icon: <i className="fa-solid fa-cart-shopping"></i>,
 		},
 		{
-			id: 7,
+			id: 4,
 			text: "Going to the swimming pool",
 			points: 100,
 			icon: <i className="fa-solid fa-person-swimming"></i>,
 		},
 		{
-			id: 8,
+			id: 5,
+			text: "Going to the cinema ",
+			points: 100,
+			icon: <i className="fa-solid fa-film"></i>,
+		},
+		{
+			id: 6,
 			text: "Mystery Box",
 			points: 300,
 			icon: <i className="fa-solid fa-gift"></i>,
 		},
 		{
-			id: 8,
-			text: "Mystery Box",
+			id: 7,
+			text: "Game evening",
 			points: 300,
-			icon: <i className="fa-solid fa-gift"></i>,
+			icon: <i className="fa-solid fa-gamepad"></i>,
+		},
+		{
+			id: 8,
+			text: "Holidays in paradise",
+			points: 999,
+			icon: <i className="fa-solid fa-heart"></i>,
+		},
+		{
+			id: 9,
+			text: "Custom Wish",
+			points: 500,
+			icon: <i className="fa-solid fa-award " />,
 		},
 	]);
 
@@ -67,12 +68,12 @@ export const Awards = () => {
 	};
 	return (
 		<div>
-			<i className="fa-solid fa-award" />
+			<h3 className="font-bold my-8 text-3xl">Awards List:</h3>
 			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8 mx-4">
 				{awardsList.map((award) => (
 					<li
 						key={award.id}
-						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(0,0,255,0.5)]"
+						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(255,0,55,0.5)]"
 					>
 						<p className="flex justify-center items-center text-center fa-2x text-orange-500 ">
 							{award.icon}

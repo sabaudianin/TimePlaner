@@ -9,30 +9,14 @@ export const NavBar = () => {
 	const { login, logout } = useAuthDispatch();
 
 	return (
-		<nav className="p-4 h-[5vh] flex justify-between w-full shadow-xl">
+		<nav className="p-4 h-[5vh] flex justify-between w-full shadow-xl items-center">
 			<div>
-				<svg
-					className="h-8 w-8 text-red-500"
-					width="24"
-					height="24"
-					viewBox="0 0 24 24"
-					strokeWidth="2"
-					stroke="currentColor"
-					fill="none"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-				>
-					{" "}
-					<path stroke="none" d="M0 0h24v24H0z" />{" "}
-					<circle cx="12" cy="12" r="9" />{" "}
-					<line x1="9" y1="10" x2="9.01" y2="10" />{" "}
-					<line x1="15" y1="10" x2="15.01" y2="10" />{" "}
-					<path d="M9.5 15a3.5 3.5 0 0 0 5 0" />{" "}
-					<path d="M12 3a2 2 0 0 0 0 4" />
-				</svg>
+				<Link to="/">
+					<i className="fa-regular fa-face-smile-wink text-4xl text-orange-500 "></i>
+				</Link>
 			</div>
 			{isAuthenticated ? (
-				<ul className="flex space-x-4">
+				<ul className="flex space-x-4 items-center">
 					<li>
 						<Link to="/">Home</Link>
 					</li>
@@ -44,10 +28,14 @@ export const NavBar = () => {
 					</li>
 				</ul>
 			) : null}
-
-			<button onClick={isAuthenticated ? logout : login}>
-				{user ? `Witaj ${user.email}` : "Witaj nieznajomy"}
-			</button>
+			<div className="flex items-center">
+				<p>{user ? `${user.email} ` : "Witaj nieznajomy"}</p>
+				{isAuthenticated && (
+					<button onClick={logout}>
+						<i className="fa-solid fa-right-from-bracket text-xl ml-2"></i>
+					</button>
+				)}
+			</div>
 		</nav>
 	);
 };

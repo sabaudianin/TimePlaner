@@ -2,6 +2,8 @@ import { useForm } from "react-hook-form";
 import { Button } from "../elements/Button";
 import { Input } from "../elements/Input";
 import { useAuthDispatch } from "../context/authorization/Authorization";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const SignUpForm = () => {
 	const {
@@ -13,21 +15,19 @@ export const SignUpForm = () => {
 
 	const { login } = useAuthDispatch();
 
-	const onSubmit = (data) => {
+	const onSubmit = async (data) => {
 		const { email, password } = data;
 		//check users exist or not
 		const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-		const isUsersExist = existingUsers.some((user) => {
-			user.email === email;
-		});
+		const isUsersExist = existingUsers.some((user) => user.email === email);
 
 		if (isUsersExist) {
-			alert("user already Exist , please log in");
+			toast.error("User already exists, please log in.");
 		} else {
 			const newUser = {
 				email,
 				password,
-				points: 100,
+				points: 1000,
 				weekPoints: 0,
 				weekPointsCompleted: 0,
 				tasks: {
@@ -47,8 +47,10 @@ export const SignUpForm = () => {
 
 			const token = "fakeToken";
 
-			login(newUser, token);
-			alert("account Createed! Logged iN");
+			await login(newUser, token);
+			console.log("Account created, showing success toast.");
+			toast.success("Account created! You are now logged in.");
+			console.log("Account created,AFTER TOAST.");
 		}
 	};
 
