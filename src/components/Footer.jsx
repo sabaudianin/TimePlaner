@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export const Footer = () => {
 	return (
 		<div className="mx-auto h-[5vh] bg-gradient-to-r from-blue-200 via-orange-200 via-green-200 flex justify-around items-center shadow-footer">
@@ -21,12 +19,12 @@ export const Footer = () => {
 					<i className="fa-brands fa-linkedin text-2xl mx-2"></i>
 				</a>
 			</div>
-			<p className="loader">
+			<p className="loader text-xxs lg:text-base">
 				<a href="mailto:rafbobbob@gmail.com">
 					<b>rafbobbob@gmail.com </b>
 				</a>
 			</p>
-			<p className="text-xs">&copy;2024 All Rights Reserved.</p>
+			<p className="text-xxxs">&copy;2024 All Rights Reserved.</p>
 		</div>
 	);
 };

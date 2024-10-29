@@ -4,6 +4,9 @@
 	background: #f2f2f2;
 	font-family: "Merriweather", serif;
 }
+body {
+	min-width: 320px;
+}
 
 .loader {
 	width: fit-content;

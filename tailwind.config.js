@@ -13,6 +13,10 @@ export default {
 				third: "#4ADE80",
 				accent: "#EAB308",
 			},
+			fontSize: {
+				xxs: "0.625rem",
+				xxxs: "0.5rem",
+			},
 		},
 	},
 	plugins: [],
