@@ -6,7 +6,7 @@ export const WeekList = ({ onSelectDay }) => {
 				{daysOfWeek.map((day) => (
 					<li key={day}>
 						<button
-							className="bg-yellow-500 py-2 rounded font-bold lg:px-24 hover:bg-yellow-800 hover:text-white transition duration-300 w-full"
+							className="bg-accent py-2 rounded font-bold lg:px-24 hover:bg-yellow-800 hover:text-white transition duration-300 w-full"
 							onClick={() => onSelectDay(day)}
 						>
 							{day}

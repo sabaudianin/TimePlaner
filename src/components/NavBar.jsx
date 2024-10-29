@@ -6,7 +6,7 @@ import {
 
 export const NavBar = () => {
 	const { isAuthenticated, user } = useAuthState();
-	const { login, logout } = useAuthDispatch();
+	const { logout } = useAuthDispatch();
 
 	return (
 		<nav className="p-4 h-[5vh] flex justify-between w-full shadow-xl items-center text-xl">
@@ -17,13 +17,13 @@ export const NavBar = () => {
 			</div>
 			{isAuthenticated ? (
 				<ul className="flex space-x-4 items-center font-extrabold ">
-					<li className="text-blue-500 border-b-4 hover:border-blue-500 ">
+					<li className="text-secondary border-b-4 hover:border-blue-500 ">
 						<Link to="/">Home</Link>
 					</li>
-					<li className="text-red-500 border-b-4 hover:border-red-500 ">
+					<li className="text-primary border-b-4 hover:border-red-500 ">
 						<Link to="/tasks">Tasks</Link>
 					</li>
-					<li className="text-green-500 border-b-4 hover:border-green-500">
+					<li className="text-third border-b-4 hover:border-green-500">
 						<Link to="/awards">Awards</Link>
 					</li>
 				</ul>

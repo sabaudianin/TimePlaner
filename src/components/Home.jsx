@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { Button } from "../elements/Button";
-import { Link } from "react-router-dom";
 import { WeekList } from "./WeekList";
 import { Statistics } from "./Statistics";
 import { useAuthState } from "../context/authorization/Authorization";
 
 export const Home = () => {
-	const { isAuthenticated, user } = useAuthState();
 	const [selectedDay, setSelectedDay] = useState("MON");
 
 	const handleDaySelect = (day) => {

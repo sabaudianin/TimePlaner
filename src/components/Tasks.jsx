@@ -42,7 +42,7 @@ export const Tasks = () => {
 			<div className="w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat"></div>
 			<div className="w-full flex justify-center pt-4">
 				<select
-					className=" p-2 rounded border-4 border-blue-400 focus:bg-blue-100 "
+					className=" p-2 rounded border-4 border-secondary  "
 					value={selectedDay}
 					onChange={(e) => setSelectedDay(e.target.value)}
 				>
@@ -60,15 +60,15 @@ export const Tasks = () => {
 				{tasksList.map((task) => (
 					<li
 						key={task.id}
-						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(0,0,255,0.5)]"
+						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-primary shadow-[0_10px_20px_#F87171]"
 					>
 						<p className="font-bold text-gray-800">{task.text}</p>
-						<p className="bg-blue-400 mt-2 text-white rounded p-2 text-center">
+						<p className="bg-secondary mt-2 text-white rounded p-2 text-center">
 							<b>{task.points}</b> points
 						</p>
 						<button
 							onClick={() => addCustomTask(task)}
-							className="bg-yellow-500 rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4"
+							className="bg-accent rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -87,16 +87,16 @@ export const Tasks = () => {
 						</button>
 					</li>
 				))}
-				<li className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(0,0,255,0.5)] ">
+				<li className="bg-gray-200 p-6 rounded flex flex-col justify-between border-4 border-third shadow-[0_10px_20px_#4ADE80] ">
 					<p className="font-bold text-gray-800">Add Task</p>
-					<p className="bg-blue-400 mt-2 text-white rounded p-2 text-center">
+					<p className="bg-secondary mt-2 text-white rounded p-2 text-center">
 						<b>?</b> points
 					</p>
 					<button
 						onClick={() => {
 							setIsOpen(true);
 						}}
-						className="bg-yellow-500 rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4 text-center"
+						className="bg-accent rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4 text-center"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
