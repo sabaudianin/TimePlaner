@@ -21,5 +21,5 @@ export const WeekList = ({ onSelectDay }) => {
 };
 
 WeekList.propTypes = {
-	onSelectDay: PropTypes.string.isRequired,
+	onSelectDay: PropTypes.func.isRequired,
 };

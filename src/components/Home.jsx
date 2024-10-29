@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { WeekList } from "./WeekList";
 import { Statistics } from "./Statistics";
-import { useAuthState } from "../context/authorization/Authorization";
 
 export const Home = () => {
 	const [selectedDay, setSelectedDay] = useState("MON");
