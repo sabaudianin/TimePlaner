@@ -43,13 +43,13 @@ export const CustomTask = ({ isOpen, onClose, onAddTask }) => {
 				/>
 				<div className="flex justify-end space-x-2">
 					<button
-						className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+						className="bg-primary text-white px-4 py-2 rounded hover:bg-red-700"
 						onClick={onClose}
 					>
 						Cancel
 					</button>
 					<button
-						className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+						className="bg-secondary text-white px-4 py-2 rounded hover:bg-blue-700"
 						onClick={handleAddTask}
 					>
 						Add Task

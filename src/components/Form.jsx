@@ -1,10 +1,8 @@
+import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-
 import { Button } from "../elements/Button";
 import { Input } from "../elements/Input";
-import { useAuthDispatch } from "../context/authorization/Authorization";
+import { useLoginForm } from "../hooks/useLoginForm";
 
 export const Form = ({ toggleVisible }) => {
 	const {
@@ -12,33 +10,13 @@ export const Form = ({ toggleVisible }) => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
-
-	const { login } = useAuthDispatch();
-
-	const onSubmit = (data) => {
-		const { email, password } = data;
-
-		const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-		const findThisUser = existingUsers.find(
-			(user) => user.email === email && user.password === password
-		);
-
-		if (findThisUser) {
-			const token = "fakeToken";
-
-			//Logging in
-			login(findThisUser, token);
-			toast.success("Login Succesed");
-		} else {
-			toast.error("Invalid email or password");
-		}
-	};
+	const { handleLogin } = useLoginForm();
 
 	return (
 		<div>
 			<h2 className="font-bold p-4 font-secondary">Log in</h2>
 			<form
-				onSubmit={handleSubmit(onSubmit)}
+				onSubmit={handleSubmit(handleLogin)}
 				className="flex flex-col justify-center items-center gap-4 shadow-md p-16"
 			>
 				<Input
@@ -82,4 +60,8 @@ export const Form = ({ toggleVisible }) => {
 			</form>
 		</div>
 	);
+};
+
+Form.propTypes = {
+	toggleVisible: PropTypes.func.isRequired,
 };

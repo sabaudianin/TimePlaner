@@ -5,7 +5,7 @@ import { Login } from "./Login";
 import { useAuthState } from "../context/authorization/Authorization";
 
 export const AppLayout = () => {
-	const { isAuthenticated, user } = useAuthState();
+	const { isAuthenticated } = useAuthState();
 	return (
 		<>
 			<NavBar />

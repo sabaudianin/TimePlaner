@@ -1,30 +1,13 @@
-import {
-	createContext,
-	useContext,
-	useReducer,
-	useCallback,
-	useEffect,
-} from "react";
+import { useReducer, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 
 import { useAuthState } from "../context/authorization/Authorization";
 import { useAuthDispatch } from "../context/authorization/Authorization";
+import { getWeek } from "./getWeek";
 
 const taskReducer = (state, action) => {
 	switch (action.type) {
-		case "SET_TASK":
-			return {
-				...state,
-				tasks: {
-					...state.tasks,
-					[action.payload.day]: [
-						...(state.tasks[action.payload.day] || []),
-						...action.payload.tasks,
-					],
-				},
-			};
-
 		case "ADD_TASK":
 			console.log("Reducer Day:", action.payload.day);
 			return {
@@ -75,18 +58,6 @@ const taskReducer = (state, action) => {
 			};
 		}
 
-		case "CALCULATE_WEEK_POINTS": {
-			let totalPoints = 0;
-			for (const day in state.tasks) {
-				state.tasks[day].forEach((task) => {
-					totalPoints += task.points;
-				});
-			}
-			return {
-				...state,
-				weekPoints: totalPoints,
-			};
-		}
 		default:
 			return state;
 	}
@@ -96,10 +67,6 @@ export const useTaskReducer = () => {
 	const [state, dispatch] = useReducer(taskReducer, { tasks: {}, points: 0 });
 	const { user } = useAuthState();
 	const { updateUser } = useAuthDispatch();
-
-	const setTasks = useCallback((tasks, day) => {
-		dispatch({ type: "SET_TASK", payload: { tasks, day } });
-	}, []);
 
 	const addTask = useCallback(
 		(task, day) => {
@@ -180,25 +147,71 @@ export const useTaskReducer = () => {
 	);
 
 	const calculateWeekPoints = useCallback(() => {
-		dispatch({ type: "CALCULATE_WEEK_POINTS" });
-		const totalPoints = Object.values(user.tasks).reduce((acc, dayTasks) => {
-			return (
-				acc +
-				dayTasks.reduce((daySum, task) => {
-					return daySum + task.points;
-				}, 0)
-			);
-		}, 0);
+		const currentWeek = getWeek();
 
-		updateUser({
-			...user,
-			weekPoints: totalPoints,
-		});
-	}, [user, updateUser, dispatch]);
+		// check is new week , update points
+		if (user.lastWeekUpdate !== currentWeek) {
+			const completedPoints = Object.values(user.tasks).reduce(
+				(acc, dayTasks) => {
+					return (
+						acc +
+						dayTasks.reduce((daySum, task) => {
+							return task.completed ? daySum + task.points : daySum;
+						}, 0)
+					);
+				},
+				0
+			);
+
+			const totalPoints = Object.values(user.tasks).reduce((acc, dayTasks) => {
+				return (
+					acc +
+					dayTasks.reduce((daySum, task) => {
+						return daySum + task.points;
+					}, 0)
+				);
+			}, 0);
+
+			updateUser({
+				...user,
+				points: user.points + completedPoints,
+				weekPoints: totalPoints,
+				weekPointsCompleted: completedPoints,
+				lastWeekUpdate: currentWeek,
+			});
+		} else {
+			// update weekPoints and weekPointsCompleted
+			const completedPoints = Object.values(user.tasks).reduce(
+				(acc, dayTasks) => {
+					return (
+						acc +
+						dayTasks.reduce((daySum, task) => {
+							return task.completed ? daySum + task.points : daySum;
+						}, 0)
+					);
+				},
+				0
+			);
+
+			const totalPoints = Object.values(user.tasks).reduce((acc, dayTasks) => {
+				return (
+					acc +
+					dayTasks.reduce((daySum, task) => {
+						return daySum + task.points;
+					}, 0)
+				);
+			}, 0);
+
+			updateUser({
+				...user,
+				weekPoints: totalPoints,
+				weekPointsCompleted: completedPoints,
+			});
+		}
+	}, [user, updateUser]);
 
 	return {
 		state,
-		setTasks,
 		addTask,
 		toggleTask,
 		deductPoints,

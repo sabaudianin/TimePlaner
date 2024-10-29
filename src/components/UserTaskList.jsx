@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { useAuthState } from "../context/authorization/Authorization";
 import { useTaskContext } from "../context/authorization/TasksProvider";
 
@@ -56,4 +57,8 @@ export const UserTaskList = ({ selectedDay }) => {
 			)}
 		</div>
 	);
+};
+
+UserTaskList.propTypes = {
+	selectedDay: PropTypes.string.isRequired,
 };

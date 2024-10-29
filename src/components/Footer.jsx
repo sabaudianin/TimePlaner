@@ -2,33 +2,31 @@ import { Link } from "react-router-dom";
 
 export const Footer = () => {
 	return (
-		<div className="mx-auto h-[5vh] bg-gradient-to-r from-blue-200 via-orange-200 via-green-200 flex justify-center items-center  shadow-footer">
-			<a
-				className="hover:text-gray-600 font-bold"
-				href="https://github.com/sabaudianin"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<i className="fa-brands fa-github text-4xl"></i>
-			</a>
-			<a
-				className="text-blue-600 hover:text-blue-800 font-bold"
-				href="www.linkedin.com/in/rafal-bobko-569388234"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<i className="fa-brands fa-linkedin text-4xl mx-4"></i>
-			</a>
-			<a
-				className="hover:text-red-800 font-bold"
-				href="mailto:rafbobbob@gmail.com"
-			>
-				<i className="fa-regular fa-envelope text-4xl"></i>
-			</a>
-			<p className="loader px-4">
-				<b>rafbobbob@gmail.com </b>
+		<div className="mx-auto h-[5vh] bg-gradient-to-r from-blue-200 via-orange-200 via-green-200 flex justify-around items-center shadow-footer">
+			<div>
+				<a
+					className="hover:text-gray-600 font-bold pr-2"
+					href="https://github.com/sabaudianin"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<i className="fa-brands fa-github text-2xl"></i>
+				</a>
+				<a
+					className="text-blue-600 hover:text-blue-800 font-bold"
+					href="https://linkedin.com/in/rafal-bobko-569388234"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<i className="fa-brands fa-linkedin text-2xl mx-2"></i>
+				</a>
+			</div>
+			<p className="loader">
+				<a href="mailto:rafbobbob@gmail.com">
+					<b>rafbobbob@gmail.com </b>
+				</a>
 			</p>
-			<p className="text-xs">Copyright &copy;2024 All Rights Reserved.</p>
+			<p className="text-xs">&copy;2024 All Rights Reserved.</p>
 		</div>
 	);
 };

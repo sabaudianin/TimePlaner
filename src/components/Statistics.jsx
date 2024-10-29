@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { useAuthState } from "../context/authorization/Authorization";
 import { useTaskContext } from "../context/authorization/TasksProvider";
 import { getWeek } from "../hooks/getWeek";
@@ -19,7 +20,7 @@ export const Statistics = ({ selectedDay }) => {
 			: 0;
 
 	return (
-		<section className="w-full h-full flex flex-col">
+		<section className="w-full h-full flex flex-col ">
 			<div className="flex w-full h-1/8">
 				<div className="w-1/2 p-8 flex items-center justify-center">
 					<div>
@@ -58,8 +59,12 @@ export const Statistics = ({ selectedDay }) => {
 				</div>
 			</div>
 
-			<div className="w-full h-40 bg-[url('/3kids.png')] bg-contain bg-center bg-no-repeat"></div>
+			<div className="w-full h-40 bg-[url('/3kids.png')] bg-contain bg-center bg-no-repeat mt-12"></div>
 			<UserTaskList selectedDay={selectedDay} />
 		</section>
 	);
+};
+
+Statistics.propTypes = {
+	selectedDay: PropTypes.string.isRequired,
 };

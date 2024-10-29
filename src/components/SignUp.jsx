@@ -1,11 +1,10 @@
 import { useForm } from "react-hook-form";
+import PropTypes from "prop-types";
 import { Button } from "../elements/Button";
 import { Input } from "../elements/Input";
-import { useAuthDispatch } from "../context/authorization/Authorization";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useSignUpForm } from "../hooks/useSignUpForm";
 
-export const SignUpForm = () => {
+export const SignUpForm = ({ toggleVisible }) => {
 	const {
 		register,
 		handleSubmit,
@@ -13,45 +12,10 @@ export const SignUpForm = () => {
 		formState: { errors },
 	} = useForm();
 
-	const { login } = useAuthDispatch();
+	const { handleSignUp } = useSignUpForm();
 
 	const onSubmit = async (data) => {
-		const { email, password } = data;
-		//check users exist or not
-		const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
-		const isUsersExist = existingUsers.some((user) => user.email === email);
-
-		if (isUsersExist) {
-			toast.error("User already exists, please log in.");
-		} else {
-			const newUser = {
-				email,
-				password,
-				points: 1000,
-				weekPoints: 0,
-				weekPointsCompleted: 0,
-				tasks: {
-					MON: [],
-					TUE: [],
-					WEN: [],
-					THR: [],
-					FRI: [],
-					SAT: [],
-					SUN: [],
-				},
-			};
-			localStorage.setItem(
-				"users",
-				JSON.stringify([...existingUsers, newUser])
-			);
-
-			const token = "fakeToken";
-
-			await login(newUser, token);
-			console.log("Account created, showing success toast.");
-			toast.success("Account created! You are now logged in.");
-			console.log("Account created,AFTER TOAST.");
-		}
+		await handleSignUp(data);
 	};
 
 	return (
@@ -103,9 +67,16 @@ export const SignUpForm = () => {
 					error={errors.rePassword}
 				/>
 				<div className="w-full flex justify-between">
+					<Button type="button" onClick={toggleVisible}>
+						Sign In
+					</Button>
 					<Button type="submit">Sign Up</Button>
 				</div>
 			</form>
 		</div>
 	);
+};
+
+SignUpForm.propTypes = {
+	toggleVisible: PropTypes.func.isRequired,
 };

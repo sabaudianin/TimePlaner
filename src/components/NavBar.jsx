@@ -28,8 +28,8 @@ export const NavBar = () => {
 					</li>
 				</ul>
 			) : null}
-			<div className="flex items-center">
-				<p>{user ? `${user.email} ` : "Witaj nieznajomy"}</p>
+			<div className="flex items-center font-secondary">
+				<p>{user ? `${user.email} ` : "Time Planer"}</p>
 				{isAuthenticated && (
 					<button onClick={logout}>
 						<i className="fa-solid fa-right-from-bracket text-xl ml-2"></i>

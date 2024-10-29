@@ -1,13 +1,5 @@
-import {
-	useState,
-	useEffect,
-	useContext,
-	createContext,
-	useMemo,
-	useCallback,
-	useReducer,
-} from "react";
-
+import { useContext, createContext } from "react";
+import PropTypes from "prop-types";
 import { useAuthReducer } from "../../hooks/useAuthReducer";
 
 const AuthStateContext = createContext();
@@ -28,6 +20,10 @@ export const AuthorizationProvider = ({ children }) => {
 			</AuthDispatchContext.Provider>
 		</AuthStateContext.Provider>
 	);
+};
+
+AuthorizationProvider.propTypes = {
+	children: PropTypes.node.isRequired,
 };
 
 export const useAuthState = () => {

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export const WeekList = ({ onSelectDay }) => {
 	const daysOfWeek = ["MON", "TUE", "WEN", "THR", "FRI", "SAT", "SUN"];
 	return (
@@ -16,4 +18,8 @@ export const WeekList = ({ onSelectDay }) => {
 			</ul>
 		</div>
 	);
+};
+
+WeekList.propTypes = {
+	onSelectDay: PropTypes.string.isRequired,
 };

@@ -1,48 +1,17 @@
-import { useState } from "react";
-import { useTaskContext } from "../context/authorization/TasksProvider";
-import { CustomTask } from "./CustomTask";
+import PropTypes from "prop-types";
 
-export const Tasks = () => {
-	const { addTask } = useTaskContext();
-
-	const [tasksList, setTasksList] = useState([
-		{ id: 1, text: "Room Cleaning", points: 3 },
-		{ id: 2, text: "Vaccum saloon", points: 10 },
-		{ id: 3, text: "Unload the dishwasher", points: 3 },
-		{ id: 4, text: "Dog Walk", points: 5 },
-		{ id: 5, text: "Do math", points: 10 },
-		{ id: 6, text: "Learn english", points: 10 },
-		{ id: 7, text: "Throw trash", points: 10 },
-		{ id: 8, text: "Spend time on yard", points: 4 },
-		{ id: 9, text: "Make desert", points: 8 },
-		{ id: 10, text: "Read a book", points: 6 },
-	]);
-
-	const [selectedDay, setSelectedDay] = useState("MON");
-	const [isOpen, setIsOpen] = useState(false);
-
-	const addCustomTask = (task) => {
-		console.log("Selected Day:", selectedDay);
-		console.log("Task:", task);
-		if (!selectedDay) {
-			console.error("Selected day is undefined");
-			return;
-		}
-		addTask(task, selectedDay);
-	};
-
-	const handleAddTask = (newTask) => {
-		const updatedTask = { ...newTask, id: tasksList.length + 1 };
-		setTasksList([...tasksList, updatedTask]);
-		addTask(updatedTask, selectedDay);
-	};
-
+export const TaskList = ({
+	tasksList,
+	selectedDay,
+	setSelectedDay,
+	addCustomTask,
+	onAddNewTask,
+}) => {
 	return (
-		<section className="w-full flex  justify-center  pt-20 flex-wrap">
-			<div className="w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat"></div>
+		<div className="w-full">
 			<div className="w-full flex justify-center pt-4">
 				<select
-					className=" p-2 rounded border-4 border-secondary  "
+					className="p-2 rounded border-4 border-secondary"
 					value={selectedDay}
 					onChange={(e) => setSelectedDay(e.target.value)}
 				>
@@ -87,15 +56,13 @@ export const Tasks = () => {
 						</button>
 					</li>
 				))}
-				<li className="bg-gray-200 p-6 rounded flex flex-col justify-between border-4 border-third shadow-[0_10px_20px_#4ADE80] ">
+				<li className="bg-gray-200 p-6 rounded flex flex-col justify-between border-4 border-third shadow-[0_10px_20px_#4ADE80]">
 					<p className="font-bold text-gray-800">Add Task</p>
 					<p className="bg-secondary mt-2 text-white rounded p-2 text-center">
 						<b>?</b> points
 					</p>
 					<button
-						onClick={() => {
-							setIsOpen(true);
-						}}
+						onClick={onAddNewTask}
 						className="bg-accent rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4 text-center"
 					>
 						<svg
@@ -115,11 +82,20 @@ export const Tasks = () => {
 					</button>
 				</li>
 			</ul>
-			<CustomTask
-				isOpen={isOpen}
-				onClose={() => setIsOpen(false)}
-				onAddTask={handleAddTask}
-			/>
-		</section>
+		</div>
 	);
+};
+
+TaskList.propTypes = {
+	tasksList: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			text: PropTypes.string.isRequired,
+			points: PropTypes.number.isRequired,
+		})
+	).isRequired,
+	selectedDay: PropTypes.string.isRequired,
+	setSelectedDay: PropTypes.func.isRequired,
+	addCustomTask: PropTypes.func.isRequired,
+	onAddNewTask: PropTypes.func.isRequired,
 };

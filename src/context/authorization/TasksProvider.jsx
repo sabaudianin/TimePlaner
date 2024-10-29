@@ -1,25 +1,12 @@
-import {
-	createContext,
-	useContext,
-	useReducer,
-	useCallback,
-	useEffect,
-} from "react";
-import { useAuthState } from "./Authorization";
+import { createContext, useContext } from "react";
+import PropTypes from "prop-types";
 import { useTaskReducer } from "../../hooks/useTaskReducer";
-import { useAuthDispatch } from "./Authorization";
 
 const TaskStateContext = createContext();
 
 export const TasksProvider = ({ children }) => {
-	const {
-		state,
-		setTasks,
-		addTask,
-		toggleTask,
-		deductPoints,
-		calculateWeekPoints,
-	} = useTaskReducer();
+	const { state, addTask, toggleTask, deductPoints, calculateWeekPoints } =
+		useTaskReducer();
 
 	return (
 		<TaskStateContext.Provider
@@ -27,7 +14,6 @@ export const TasksProvider = ({ children }) => {
 				state,
 				addTask,
 				toggleTask,
-				setTasks,
 				deductPoints,
 				calculateWeekPoints,
 			}}
@@ -35,6 +21,9 @@ export const TasksProvider = ({ children }) => {
 			{children}
 		</TaskStateContext.Provider>
 	);
+};
+TasksProvider.propTypes = {
+	children: PropTypes.node.isRequired,
 };
 
 export const useTaskContext = () => {
