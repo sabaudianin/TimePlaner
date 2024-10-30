@@ -14,10 +14,12 @@ export const Form = ({ toggleVisible }) => {
 
 	return (
 		<div>
-			<h2 className="font-bold p-4 font-secondary">Log in</h2>
+			<h2 className="font-bold p-4 font-secondary text-xs lg:text-base">
+				Log in
+			</h2>
 			<form
 				onSubmit={handleSubmit(handleLogin)}
-				className="flex flex-col justify-center items-center gap-4 shadow-md p-16"
+				className="flex flex-col justify-center items-center gap-4 shadow-md p-16 text-xs lg:text-base"
 			>
 				<Input
 					register={register}
@@ -44,7 +46,7 @@ export const Form = ({ toggleVisible }) => {
 					}}
 					error={errors.password}
 				/>
-				<div className="w-full flex justify-between">
+				<div className="w-full flex justify-between text-xs lg:text-base">
 					<Button type="submit">Sign In</Button>
 
 					<Button

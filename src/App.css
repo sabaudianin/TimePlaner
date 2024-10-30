@@ -36,3 +36,9 @@ body {
 	background-color: blue !important;
 	color: #fff !important;
 }
+
+@media (min-aspect-ratio: 3/2) {
+	.hide-on-wide {
+		display: none !important;
+	}
+}

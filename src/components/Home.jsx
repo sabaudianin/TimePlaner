@@ -10,7 +10,7 @@ export const Home = () => {
 	};
 
 	return (
-		<section className="min-h-[90vh] w-full  flex flex-col lg:flex-row ">
+		<section className="w-full flex flex-col lg:flex-row ">
 			<WeekList onSelectDay={handleDaySelect} />
 			<Statistics selectedDay={selectedDay} />
 		</section>
