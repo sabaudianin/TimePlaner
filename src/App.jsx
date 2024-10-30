@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { NotFound } from "./components/NotFound";
 import { Home } from "./components/Home";
 import { TaskManager } from "./components/TaskManager";
 import { Awards } from "./components/Awards";
@@ -18,6 +18,7 @@ function App() {
 						<Route path="awards" element={<Awards />} />
 						<Route path="tasks" element={<TaskManager />} />
 					</Route>
+					<Route path="*" element={<NotFound />} />
 				</Routes>
 
 				<ToastContainer />

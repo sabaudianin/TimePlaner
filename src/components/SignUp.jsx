@@ -19,11 +19,11 @@ export const SignUpForm = ({ toggleVisible }) => {
 	};
 
 	return (
-		<div>
+		<div className="text-xs lg:text-base">
 			<h2 className="font-bold p-4 font-secondary">Create Account</h2>
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className="flex flex-col justify-center items-center gap-4 shadow-md p-16"
+				className="flex flex-col justify-center items-center gap-4 shadow-md p-16 text-xs lg:text-base"
 			>
 				<Input
 					register={register}
