@@ -22,9 +22,9 @@ export const Statistics = ({ selectedDay }) => {
 	return (
 		<section className="w-full h-full flex flex-col ">
 			<div className="flex w-full h-1/8">
-				<div className="w-1/2 p-8 flex items-center justify-center">
+				<div className="w-1/2 p-8 flex items-center justify-center text-xs lg:text-base">
 					<div>
-						<h2 className="font-medium">
+						<h2>
 							Today:<b> {new Date().toDateString()}</b>
 						</h2>
 						<h2>
@@ -33,7 +33,7 @@ export const Statistics = ({ selectedDay }) => {
 					</div>
 				</div>
 
-				<div className="w-1/2  p-4 flex items-center justify-center">
+				<div className="w-1/2 p-4 flex items-center justify-center text-xs">
 					{isAuthenticated && user && (
 						<div>
 							<h2>
@@ -59,7 +59,7 @@ export const Statistics = ({ selectedDay }) => {
 				</div>
 			</div>
 
-			<div className="w-full h-40 bg-[url('/3kids.png')] bg-contain bg-center bg-no-repeat mt-12"></div>
+			<div className="w-full h-20 lg:h-40 bg-[url('/3kids.png')] bg-contain bg-center bg-no-repeat mt-12"></div>
 			<UserTaskList selectedDay={selectedDay} />
 		</section>
 	);

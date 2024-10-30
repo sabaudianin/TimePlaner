@@ -12,7 +12,7 @@ export const UserTaskList = ({ selectedDay }) => {
 	return (
 		<div>
 			{tasksForSelectedDay.length > 0 ? (
-				<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mx-8 mt-24">
+				<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-6 mx-16 ">
 					{tasksForSelectedDay.map((task) => {
 						const taskBorderClass = task.completed
 							? "border-green-300 shadow-[0_10px_20px_rgba(0,255,0,0.5)]"
@@ -21,18 +21,18 @@ export const UserTaskList = ({ selectedDay }) => {
 						return (
 							<li
 								key={task.id}
-								className={`p-4 rounded flex flex-col justify-between border-4 ${taskBorderClass}`}
+								className={`p-2 rounded flex flex-col justify-between border-4 ${taskBorderClass}`}
 							>
 								<p>{task.text}</p>
-								<p className="bg-blue-300 m-2 text-white rounded p-2 text-center">
+								<p className="bg-blue-300 text-white rounded text-center">
 									<b>{task.points}</b> points
 								</p>
 								<button
 									className={`${
 										task.completed
-											? "bg-green-400 hover:bg-green-500"
-											: "bg-red-400 hover:bg-red-500"
-									} mt-2 py-2 rounded`}
+											? "bg-third hover:bg-green-500"
+											: "bg-primary hover:bg-red-500"
+									} mt-1  rounded`}
 									onClick={() => toggleTask(task.id)}
 								>
 									{task.completed ? "Done" : "To Do"}

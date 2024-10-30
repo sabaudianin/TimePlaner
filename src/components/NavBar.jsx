@@ -28,7 +28,7 @@ export const NavBar = () => {
 					</li>
 				</ul>
 			) : null}
-			<div className="flex items-center font-secondary text-xxxs lg:text-base">
+			<div className="flex items-center font-bold text-xxxs lg:text-base">
 				<p>{user ? `${user.email} ` : "Time Planer"}</p>
 				{isAuthenticated && (
 					<button onClick={logout}>

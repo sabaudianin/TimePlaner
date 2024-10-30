@@ -73,7 +73,7 @@ export const Awards = () => {
 				Available points: <b> {user.points}</b>
 			</h2>
 			<h3 className="font-bold my-8 text-3xl">Awards List:</h3>
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8 mx-4">
+			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8 mx-4 text-xs lg:text-base">
 				{awardsList.map((award) => (
 					<li
 						key={award.id}

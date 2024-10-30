@@ -8,7 +8,7 @@ export const TaskList = ({
 	onAddNewTask,
 }) => {
 	return (
-		<div className="w-full">
+		<div className="w-full text-xs lg:text-base">
 			<div className="w-full flex justify-center pt-4">
 				<select
 					className="p-2 rounded border-4 border-secondary"
@@ -25,19 +25,19 @@ export const TaskList = ({
 				</select>
 			</div>
 
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 pt-8">
+			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-4 mx-16 lg:mx-32 ">
 				{tasksList.map((task) => (
 					<li
 						key={task.id}
-						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-primary shadow-[0_10px_20px_#F87171]"
+						className=" flex flex-col justify-around bg-rgba(255,0,0,0.5) rounded border-4 p-2 border-primary shadow-[0_10px_20px_#F87171]"
 					>
 						<p className="font-bold text-gray-800">{task.text}</p>
-						<p className="bg-secondary mt-2 text-white rounded p-2 text-center">
+						<p className="bg-secondary  text-white rounded text-center my-2">
 							<b>{task.points}</b> points
 						</p>
 						<button
 							onClick={() => addCustomTask(task)}
-							className="bg-accent rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4"
+							className="bg-third rounded font-bold lg:px-16 hover:bg-green-500 hover:text-white transition duration-300 w-full "
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -56,14 +56,14 @@ export const TaskList = ({
 						</button>
 					</li>
 				))}
-				<li className="bg-gray-200 p-6 rounded flex flex-col justify-between border-4 border-third shadow-[0_10px_20px_#4ADE80]">
-					<p className="font-bold text-gray-800">Add Task</p>
-					<p className="bg-secondary mt-2 text-white rounded p-2 text-center">
+				<li className="flex flex-col justify-around bg-rgba(255,0,0,0.5) rounded border-4 p-2 border-primary shadow-[0_10px_20px_#F87171]">
+					<p className="font-bold text-gray-800">Add Custom Task</p>
+					<p className="bg-secondary text-white rounded text-center my-2">
 						<b>?</b> points
 					</p>
 					<button
 						onClick={onAddNewTask}
-						className="bg-accent rounded font-bold lg:px-16 hover:bg-yellow-800 hover:text-white transition duration-300 w-full mt-4 text-center"
+						className="bg-accent rounded font-bold lg:px-16 hover:bg-green-500 hover:text-white transition duration-300 w-full"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
