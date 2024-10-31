@@ -12,7 +12,7 @@ export const Login = () => {
 	};
 
 	return (
-		<section className="flex justify-around items-center min-h-[90vh] flex-col lg:flex-row  ">
+		<section className="flex justify-around items-center min-h-[85vh] flex-col lg:flex-row  ">
 			<div className="w-full lg:w-1/2 h-full lg:h-full hidden lg:flex justify-center items-center hide-on-wide ">
 				<div className="relative w-[80%] h-[80%] bg-red-400 ">
 					<ImageBox src="/learn.jpg" top="top-10" left="left-0" />

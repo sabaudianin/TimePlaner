@@ -12,7 +12,7 @@ export const UserTaskList = ({ selectedDay }) => {
 	return (
 		<section className="text-xs lg:text-xl">
 			{tasksForSelectedDay.length > 0 ? (
-				<ul className="grid grid-cols-2 lg:grid-cols-3 gap-3 py-2 mx-4 lg:mx-16 ">
+				<ul className="grid grid-cols-3 lg:grid-cols-3 gap-3 py-2 mx-4 lg:mx-16 ">
 					{tasksForSelectedDay.map((task) => {
 						const taskBorderClass = task.completed
 							? "border-green-300 shadow-[0_10px_20px_rgba(0,255,0,0.5)]"
