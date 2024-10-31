@@ -59,7 +59,7 @@ export const Statistics = ({ selectedDay }) => {
 				</div>
 			</div>
 
-			<div className="w-full h-20 lg:h-40 bg-[url('/3kids.png')] bg-contain bg-center bg-no-repeat mt-12"></div>
+			<div className="w-full h-20 lg:h-80 bg-[url('/3kids.png')] bg-contain bg-center bg-no-repeat"></div>
 			<UserTaskList selectedDay={selectedDay} />
 		</section>
 	);

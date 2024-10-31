@@ -9,7 +9,7 @@ export const NavBar = () => {
 	const { logout } = useAuthDispatch();
 
 	return (
-		<nav className="p-4 h-[5vh] flex justify-between w-full shadow-xl items-center text-xl">
+		<nav className="p-4 h-[10vh] flex justify-between w-full shadow-xl items-center text-xl">
 			<div>
 				<Link to="/">
 					<i className="fa-regular fa-face-smile-wink text-xl lg:text-4xl text-orange-500 "></i>

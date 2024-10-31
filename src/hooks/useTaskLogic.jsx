@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTaskContext } from "../context/authorization/TasksProvider";
+import { toast } from "react-toastify";
 
 export const useTasksLogic = () => {
 	const { addTask } = useTaskContext();
@@ -24,6 +25,7 @@ export const useTasksLogic = () => {
 			return;
 		}
 		addTask(task, selectedDay);
+		toast.success("Task Added", { theme: "colored" });
 	};
 
 	const handleAddTask = (newTask) => {

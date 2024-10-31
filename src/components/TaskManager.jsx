@@ -14,8 +14,8 @@ export const TaskManager = () => {
 	} = useTasksLogic();
 
 	return (
-		<section className="w-full flex justify-center pt-20 flex-wrap">
-			<div className="w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat"></div>
+		<section className="w-full flex justify-center pt-2 lg:pt-8 flex-wrap">
+			<div className="hidden lg:block w-full h-40 bg-[url('/2kids.png')] bg-contain bg-center bg-no-repeat "></div>
 			<TaskList
 				tasksList={tasksList}
 				selectedDay={selectedDay}

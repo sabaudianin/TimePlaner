@@ -10,9 +10,9 @@ export const UserTaskList = ({ selectedDay }) => {
 	const tasksForSelectedDay = user?.tasks?.[selectedDay] || [];
 
 	return (
-		<div>
+		<section className="text-xs lg:text-xl">
 			{tasksForSelectedDay.length > 0 ? (
-				<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-6 mx-16 ">
+				<ul className="grid grid-cols-2 lg:grid-cols-3 gap-3 py-2 mx-4 lg:mx-16 ">
 					{tasksForSelectedDay.map((task) => {
 						const taskBorderClass = task.completed
 							? "border-green-300 shadow-[0_10px_20px_rgba(0,255,0,0.5)]"
@@ -42,8 +42,8 @@ export const UserTaskList = ({ selectedDay }) => {
 					})}
 				</ul>
 			) : (
-				<div className="w-full text-center mt-36 px-4 ">
-					<p className="text-lg font-bold">
+				<div className="w-full text-center px-4 ">
+					<p className=" font-bold">
 						No tasks scheduled for {selectedDay}. Please add tasks to get
 						started.
 					</p>
@@ -55,7 +55,7 @@ export const UserTaskList = ({ selectedDay }) => {
 					</Link>
 				</div>
 			)}
-		</div>
+		</section>
 	);
 };
 

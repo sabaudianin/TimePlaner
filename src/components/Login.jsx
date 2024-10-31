@@ -38,7 +38,6 @@ export const Login = () => {
 					/>
 				</div>
 			</div>
-			<div className="hidden lg:block absolute w-1/2 h-1/4 bg-[url('/bg.png')] bg-contain bg-bottom bg-no-repeat self-end hide-on-wide"></div>
 
 			<div className="flex justify-center items-center w-full lg:w-1/2 h-full lg:h-full">
 				{isVisible ? (

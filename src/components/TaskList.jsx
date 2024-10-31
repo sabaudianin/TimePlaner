@@ -8,31 +8,29 @@ export const TaskList = ({
 	onAddNewTask,
 }) => {
 	return (
-		<div className="w-full text-xs lg:text-base">
-			<div className="w-full flex justify-center pt-4">
-				<select
-					className="p-2 rounded border-4 border-secondary"
-					value={selectedDay}
-					onChange={(e) => setSelectedDay(e.target.value)}
-				>
-					<option value="MON">Monday</option>
-					<option value="TUE">Tuesday</option>
-					<option value="WEN">Wednesday</option>
-					<option value="THR">Thursday</option>
-					<option value="FRI">Friday</option>
-					<option value="SAT">Saturday</option>
-					<option value="SUN">Sunday</option>
-				</select>
-			</div>
+		<section className="w-full text-xs lg:text-base">
+			<select
+				className="w-1/2 my-4 p-2 rounded border-4 border-secondary"
+				value={selectedDay}
+				onChange={(e) => setSelectedDay(e.target.value)}
+			>
+				<option value="MON">Monday</option>
+				<option value="TUE">Tuesday</option>
+				<option value="WEN">Wednesday</option>
+				<option value="THR">Thursday</option>
+				<option value="FRI">Friday</option>
+				<option value="SAT">Saturday</option>
+				<option value="SUN">Sunday</option>
+			</select>
 
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 py-4 mx-16 lg:mx-32 ">
+			<ul className="grid grid-cols-3 lg:grid-cols-4 gap-2 py-2 mx-2 lg:mx-32 lg:py-16 ">
 				{tasksList.map((task) => (
 					<li
 						key={task.id}
-						className=" flex flex-col justify-around bg-rgba(255,0,0,0.5) rounded border-4 p-2 border-primary shadow-[0_10px_20px_#F87171]"
+						className=" flex flex-col justify-around bg-rgba(255,0,0,0.5) rounded border-2 p-1 border-primary shadow-[0_10px_10px_#F87171]"
 					>
 						<p className="font-bold text-gray-800">{task.text}</p>
-						<p className="bg-secondary  text-white rounded text-center my-2">
+						<p className="bg-secondary text-white rounded text-center my-1">
 							<b>{task.points}</b> points
 						</p>
 						<button
@@ -56,9 +54,9 @@ export const TaskList = ({
 						</button>
 					</li>
 				))}
-				<li className="flex flex-col justify-around bg-rgba(255,0,0,0.5) rounded border-4 p-2 border-primary shadow-[0_10px_20px_#F87171]">
+				<li className="flex flex-col justify-around bg-rgba(255,0,0,0.5) rounded border-2 p-1 border-primary shadow-[0_10px_20px_#F87171]">
 					<p className="font-bold text-gray-800">Add Custom Task</p>
-					<p className="bg-secondary text-white rounded text-center my-2">
+					<p className="bg-secondary text-white rounded text-center my-1">
 						<b>?</b> points
 					</p>
 					<button
@@ -82,7 +80,7 @@ export const TaskList = ({
 					</button>
 				</li>
 			</ul>
-		</div>
+		</section>
 	);
 };
 

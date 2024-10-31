@@ -9,7 +9,7 @@ export const AppLayout = () => {
 	return (
 		<>
 			<NavBar />
-			<section className="max-w-screen-xl text-center mx-auto  min-h-[90vh] ">
+			<section className="max-w-screen-xl text-center mx-auto  min-h-[85vh] ">
 				{isAuthenticated ? <Outlet /> : <Login />}
 			</section>
 

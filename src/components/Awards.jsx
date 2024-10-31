@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useTaskContext } from "../context/authorization/TasksProvider";
 import { useAuthState } from "../context/authorization/Authorization";
+import { toast } from "react-toastify";
 
 export const Awards = () => {
 	const [awardsList, setAwardsList] = useState([
@@ -65,25 +66,25 @@ export const Awards = () => {
 
 	const handleAward = (award) => {
 		deductPoints(award.points);
-		console.log(`Picked award: ${award.text}`);
+		toast.success("Task Added", { theme: "colored" });
 	};
 	return (
 		<section>
-			<h2 className="pt-8">
+			<h2 className="pt-4 lg:pt-8">
 				Available points: <b> {user.points}</b>
 			</h2>
-			<h3 className="font-bold my-8 text-3xl">Awards List:</h3>
-			<ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-6 mt-8 mx-4 text-xs lg:text-base">
+			<h3 className="pt-2 font-bold text-2xl lg:py-8">Awards List:</h3>
+			<ul className="grid grid-cols-3 sm:grid-cols-2 lg:grid-cols-3 gap-2 mt-2 mx-2 text-xxs lg:mx-16 lg:gap-12 lg:text-base">
 				{awardsList.map((award) => (
 					<li
 						key={award.id}
-						className="bg-rgba(255,0,0,0.5) p-6 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_20px_rgba(255,0,55,0.5)]"
+						className="bg-rgba(255,0,0,0.5) p-1 rounded flex flex-col justify-between border-4 border-red-300 shadow-[0_10px_10px_rgba(255,0,55,0.5)]"
 					>
 						<p className="flex justify-center items-center text-center fa-2x text-red-500 ">
 							{award.icon}
 						</p>
 						<p className="font-bold text-gray-800">{award.text}</p>
-						<p className="bg-blue-400 mt-2 text-white rounded p-2 text-center">
+						<p className="bg-blue-400  text-white rounded p-1 text-center">
 							<b>{award.points}</b> points
 						</p>
 						<button
@@ -91,7 +92,7 @@ export const Awards = () => {
 								console.log(award);
 								handleAward(award);
 							}}
-							className="mt-2 bg-green-400 hover:bg-green-500"
+							className="bg-green-400 hover:bg-green-500"
 						>
 							Pick this prize
 						</button>
