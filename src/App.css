@@ -26,9 +26,9 @@ body {
 
 @keyframes l32 {
 	25%,
-	100% {
-		text-shadow: 0.03px -0.01px 0.01px rgb(255 0 0),
-			0.02px 0.02px 0 rgb(219, 202, 94), -0.02px 0.02px 0 rgb(0 0 255);
+	75% {
+		text-shadow: 0.01px -0.001px 0.001px rgb(255 0 0),
+			0.01px 0.01px 0 rgb(219, 202, 94), -0.01px 0.01px 0 rgb(0 0 255);
 	}
 }
 
